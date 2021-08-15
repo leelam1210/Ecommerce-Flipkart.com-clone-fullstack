@@ -1,6 +1,6 @@
 import Products from "../../models/productModel.js";
 import Categories from "../../models/categoryModel.js";
-// import Orders from "../models/orderModel.js";
+import Orders from "../../models/orderModel.js";
 
 const createCategoriChildren = (categories, parentId = null) => {
     const categoryList = [];
@@ -45,9 +45,13 @@ export const initialData = async (req, res) => {
             .select("_id productId name price quantity slug description productPictures category")
             .populate({ path: "category", select: "_id name" })
             .exec();
+        const orders = await Orders.find({})
+            .populate("items.productId", "name quantity productId")
+            .exec();
         res.status(200).json({
             categories: createCategoriChildren(categories),
             products,
+            orders,
         });
     } catch (error) {
         return res.status(500).json({ success: false, message: 'Internal server error' });

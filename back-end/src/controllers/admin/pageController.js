@@ -15,13 +15,13 @@ export const createPage = async (req, res) => {
 
         if (banners.length > 0) {
             req.body.banners = banners.map((banner, index) => ({
-                image: `${process.env.API_IMG_CATEGORY}/public/image/${banner.filename}`,
+                image: `/public/image/${banner.filename}`,
                 navigateTo: `/bannerClicked?categoryId=${category}&type=${type}`,
             }));
         }
         if (products && products.length > 0) {
             req.body.products = products.map((product, index) => ({
-                image: `${process.env.API_IMG_CATEGORY}/public/image/${product.filename}`,
+                image: `/public/image/${product.filename}`,
                 navigateTo: `/productClicked?categoryId=${category}&type=${type}`,
             }));
         }

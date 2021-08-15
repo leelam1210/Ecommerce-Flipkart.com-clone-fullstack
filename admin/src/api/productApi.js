@@ -8,6 +8,6 @@ export const addProductApi = async (formProduct) => {
 
 export const getAllProductApi = async () => {
     const url = '/product';
-    const res = await API.get(url,);
+    const res = await API.get(url);
     return res;
 };

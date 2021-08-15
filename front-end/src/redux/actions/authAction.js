@@ -1,4 +1,4 @@
-import { userTypes, authTypes } from "./constants";
+import { userTypes, authTypes, cartTypes } from "./constants";
 import { signUpApi, signInApi, signOutApi } from "../../api/authApi";
 import { validRegister } from "../../utils/Valid";
 
@@ -39,9 +39,13 @@ export const signIn = (formSignin) => async dispatch => {
 export const signOut = () => async dispatch => {
     try {
         dispatch({ type: authTypes.LOGOUT_REQUEST });
-        const { data } = await signOutApi();
+        // localStorage.removeItem("authUser");
+        // localStorage.removeItem("token");
+
+        // const { data } = await signOutApi();
         localStorage.clear();
-        // dispatch({ type: authTypes.LOGIN_SUCCESS });
+        dispatch({ type: authTypes.LOGIN_SUCCESS });
+        dispatch({ type: cartTypes.RESET_CART });
         window.location.href = "/";
 
     } catch (error) {

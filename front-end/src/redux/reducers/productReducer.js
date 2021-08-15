@@ -2,12 +2,13 @@ import { productTypes } from "../actions/constants";
 
 const initialStateProduct = {
     products: [],
+    priceRange: {},
     productsByPrice: {
-        under5k: [],
-        under10k: [],
-        under15k: [],
-        under20k: [],
-        under30k: [],
+        // under5k: [],
+        // under10k: [],
+        // under15k: [],
+        // under20k: [],
+        // under30k: [],
     },
     page: {},
     productDetails: {},
@@ -20,6 +21,7 @@ export const productReducer = (state = initialStateProduct, action) => {
             return (state = {
                 ...state,
                 products: action.payload.products,
+                priceRange: action.payload.priceRange,
                 productsByPrice: {
                     ...action.payload.productsByPrice,
                 }

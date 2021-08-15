@@ -10,7 +10,7 @@ const CartItem = (props) => {
     const [qty, setQty] = useState(props.cartItem.qty);
 
     const { _id, name, price, image } = props.cartItem;
-    console.log(props.cartItem);
+    // console.log(props.cartItem);
 
     const onQuantityIncrement = () => {
         setQty(qty + 1);

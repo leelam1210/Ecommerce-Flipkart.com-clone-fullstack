@@ -13,14 +13,14 @@ export const addProduct = (formProduct) => async dispatch => {
     }
 };
 
-// export const getAllProducts = () => async dispatch => {
-//     try {
-//         dispatch({ type: productTypes.GET_ALL_PRODUCTS_REQUEST });
-//         const { data } = await getAllProductApi();
-//         console.log(data);
+export const getAllProducts = () => async dispatch => {
+    try {
+        dispatch({ type: productTypes.GET_ALL_PRODUCTS_REQUEST });
+        const { data } = await getAllProductApi();
+        console.log(data);
 
-//     } catch (error) {
-//         dispatch({ type: productTypes.GET_ALL_PRODUCTS_FAILURE, payload: error.response.data.message });
-//         console.log(error.response.data.message);
-//     }
-// };
+    } catch (error) {
+        dispatch({ type: productTypes.GET_ALL_PRODUCTS_FAILURE, payload: error.response.data });
+        console.log(error.response.data.message);
+    }
+};

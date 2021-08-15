@@ -10,7 +10,7 @@ export const getAllCategory = () => async dispatch => {
 
     } catch (error) {
         dispatch({ type: categoryTypes.GET_ALL_CATEGORIES_FAILURE, payload: error.response.data.message });
-        console.log(error.response.data);
+        console.log("error.response.data");
     }
 };
 

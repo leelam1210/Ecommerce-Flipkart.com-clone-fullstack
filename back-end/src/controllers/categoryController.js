@@ -44,7 +44,7 @@ export const addCategory = async (req, res) => {
 
         // xu ly tep don anh chi co 1 anh
         if (req.file)
-            categoryUrl = process.env.API_IMG_CATEGORY + '/public/image/' + req.file.filename;
+            categoryUrl = '/public/image/' + req.file.filename;
 
         if (!name)
             return res

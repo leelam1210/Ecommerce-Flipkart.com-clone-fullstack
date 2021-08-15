@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import './styles.css';
 import { getParams } from '../../utils/getParams';
 import ProductPage from './ProductPage';
+import PageNonType from './PageNonType';
 
 const ProductListPage = (props) => {
     const { search } = useLocation();
@@ -20,7 +21,7 @@ const ProductListPage = (props) => {
                 content = <ProductPage {...props} />
                 break;
             default:
-                content = null;
+                content = <PageNonType {...props} />;
         }
         return content;
     };

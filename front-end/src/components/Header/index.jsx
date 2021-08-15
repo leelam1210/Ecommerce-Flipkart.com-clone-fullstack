@@ -13,6 +13,7 @@ import {
     MaterialButton,
     DropdownMenu
 } from '../MaterialUI';
+import Cart from '../UI/Cart';
 
 /**
 * @author LE LAM
@@ -24,6 +25,9 @@ const Header = (props) => {
     const [loginModal, setLoginModal] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    // state cart value
+    const { cartItems } = useSelector((state) => state.cart);
 
     const dispatch = useDispatch();
     const { isAuthenticated, authData } = useSelector(state => state.auth);
@@ -52,7 +56,14 @@ const Header = (props) => {
                 menus={[
                     { label: 'My Profile', href: '', icon: null },
                     { label: 'Flipkart Plus Zone', href: '', icon: null },
-                    { label: 'Orders', href: '', icon: null },
+                    {
+                        label: "Orders",
+                        href: `/account/orders`,
+                        icon: null,
+                        onClick: () => {
+                            !isAuthenticated && setLoginModal(true);
+                        },
+                    },
                     { label: 'Wishlist', href: '', icon: null },
                     { label: 'Rewards', href: '', icon: null },
                     { label: 'Gift Cards', href: '', icon: null },
@@ -97,40 +108,41 @@ const Header = (props) => {
                         </div>
                         <div className="rightspace">
 
+                            <div className="loginInputContainer">
+                                <MaterialInput
+                                    type="email"
+                                    label="Enter Email/Enter Mobile Number"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
 
-                            <MaterialInput
-                                type="email"
-                                label="Enter Email/Enter Mobile Number"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
+                                <MaterialInput
+                                    type="password"
+                                    label="Enter Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                // rightElement={<a href="#">Forgot?</a>}
+                                />
 
-                            <MaterialInput
-                                type="password"
-                                label="Enter Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            // rightElement={<a href="#">Forgot?</a>}
-                            />
+                                <MaterialButton
+                                    title="Login"
+                                    bgColor="#fb641b"
+                                    textColor="#ffffff"
+                                    style={{ margin: '40px 0 20px 0', }}
+                                    onClick={userLogin}
+                                />
 
-                            <MaterialButton
-                                title="Login"
-                                bgColor="#fb641b"
-                                textColor="#ffffff"
-                                style={{ margin: '40px 0 20px 0', }}
-                                onClick={userLogin}
-                            />
+                                <p style={{ textAlign: "center", margin: '0' }}>OR</p>
 
-                            <p style={{ textAlign: "center", margin: '0' }}>OR</p>
-
-                            <MaterialButton
-                                title="Request OTP"
-                                bgColor="#ffffff"
-                                textColor="#2874f0"
-                                style={{
-                                    margin: "20px 0",
-                                }}
-                            />
+                                <MaterialButton
+                                    title="Request OTP"
+                                    bgColor="#ffffff"
+                                    textColor="#2874f0"
+                                    style={{
+                                        margin: "20px 0",
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,7 +192,7 @@ const Header = (props) => {
                             </a>
                         }
                         menus={[
-                            { label: 'Notification Preference', href: '', icon: <IoIosCart /> },
+                            { label: 'Notification Preference', href: '/cart', icon: <IoIosCart /> },
                             { label: 'Sell on flipkart', href: '', icon: null },
                             { label: '24x7 Customer Care', href: '', icon: null },
                             { label: 'Advertise', href: '', icon: null },
@@ -188,8 +200,9 @@ const Header = (props) => {
                         ]}
                     />
                     <div>
-                        <a className="cart">
-                            <IoIosCart />
+                        <a href='/cart' className="cart">
+                            {/* <IoIosCart /> */}
+                            <Cart count={Object.keys(cartItems).length} />
                             <span style={{ margin: '0 10px' }}>Cart</span>
                         </a>
                     </div>
